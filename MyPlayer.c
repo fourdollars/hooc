@@ -29,19 +29,19 @@ bool MyPlayer_delete(MyPlayer* self)
     return true;
 }
 
-static bool MyPlayer_open(const char* url)
+static bool MyPlayer_open(MyPlayer* self, const char* url)
 {
     printf("%s %s\n", __FUNCTION__, url);
     return true;
 }
 
-static bool MyPlayer_play(void)
+static bool MyPlayer_play(MyPlayer* self)
 {
     printf("%s\n", __FUNCTION__);
     return true;
 }
 
-static bool MyPlayer_close(void)
+static bool MyPlayer_close(MyPlayer* self)
 {
     printf("%s\n", __FUNCTION__);
     return true;

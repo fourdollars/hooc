@@ -3,8 +3,8 @@
 int main(int argc, char* argv[])
 {
     MyPlayer* player = MyPlayer_new();
-    player.open("hello world");
-    player.play();
-    player.close();
+    player->open(player, "hello world");
+    player->play(player);
+    player->close(player);
     MyPlayer_delete(player);
 }
