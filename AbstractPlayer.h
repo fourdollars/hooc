@@ -4,40 +4,59 @@
 #define __ABSTRACT_PLAYER_H__
 __BEGIN_DECLS
 
-typedef struct _AbstractPlayer AbstractPlayer;
-
 /**
- * @brief Abstract Player interface
+ * @interface AbstractPlayer
  */
-struct _AbstractPlayer {
-    /**
-     * @brief To keep some private data.
-     */
+typedef struct AbstractPlayer AbstractPlayer;
+
+struct AbstractPlayer {
+    /** @cond */
     void* _private;
+    /** @endcond */
+
     /**
      * @brief 'open' function prototype
+     * @public @memberof AbstractPlayer
+     * @fn bool open(AbstractPlayer* self, const char* url);
      *
-     * @sa ConcretePlayer_open
+     * @sa ConcretePlayer::open
      */
+    /** @cond */
     bool (*open)(AbstractPlayer* self, const char* url);
+    /** @endcond */
+
     /**
      * @brief 'play' function prototype
+     * @public @memberof AbstractPlayer
+     * @fn bool play(AbstractPlayer* self);
      *
-     * @sa ConcretePlayer_play
+     * @sa ConcretePlayer::play
      */
+    /** @cond */
     bool (*play)(AbstractPlayer* self);
+    /** @endcond */
+
     /**
      * @brief 'close' function prototype
+     * @public @memberof AbstractPlayer
+     * @fn bool close(AbstractPlayer* self);
      *
-     * @sa ConcretePlayer_close
+     * @sa ConcretePlayer::close
      */
+    /** @cond */
     bool (*close)(AbstractPlayer* self);
+    /** @endcond */
+
     /**
      * @brief 'destroy' function prototype
+     * @public @memberof AbstractPlayer
+     * @fn bool destroy(AbstractPlayer* self);
      *
-     * @sa ConcretePlayer_destroy
+     * @sa ConcretePlayer::destroy
      */
+    /** @cond */
     bool (*destroy)(AbstractPlayer* self);
+    /** @endcond */
 };
 
 __END_DECLS

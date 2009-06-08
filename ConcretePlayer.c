@@ -10,6 +10,8 @@
 
 /**
  * @brief This is ConcretePlayer's open function.
+ * @public @memberof ConcretePlayer
+ * @fn bool open(ConcretePlayer* self, const char* url);
  *
  * @param self ConcretePlayer instance
  * @param url The target URL
@@ -22,6 +24,8 @@ static bool ConcretePlayer_open(ConcretePlayer* self, const char* url);
 
 /**
  * @brief This is ConcretePlayer's play function.
+ * @public @memberof ConcretePlayer
+ * @fn bool play(ConcretePlayer* self);
  *
  * @param self ConcretePlayer instance
  *
@@ -33,6 +37,8 @@ static bool ConcretePlayer_play(ConcretePlayer* self);
 
 /**
  * @brief This is ConcretePlayer's close function.
+ * @public @memberof ConcretePlayer
+ * @fn bool close(ConcretePlayer* self);
  *
  * @param self ConcretePlayer instance
  *
@@ -44,6 +50,8 @@ static bool ConcretePlayer_close(ConcretePlayer* self);
 
 /**
  * @brief This is ConcretePlayer's destroy function.
+ * @public @memberof ConcretePlayer
+ * @fn bool destroy(ConcretePlayer* self);
  *
  * @param self ConcretePlayer instance
  *

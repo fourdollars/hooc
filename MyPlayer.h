@@ -4,35 +4,39 @@
 #define __MY_PLAYER_H__
 __BEGIN_DECLS
 
-typedef struct _MyPlayer MyPlayer;
+/**
+ * @class MyPlayer
+ */
+typedef struct MyPlayer MyPlayer;
 
-MyPlayer* MyPlayer_new(void);
+/**
+ * @brief Use this to create object of MyPlayer.
+ *
+ * @return MyPlayer* The object instance of MyPlayer.
+ * @retval NULL If it fails.
+ */
+MyPlayer* MyPlayer_create(void);
 
-bool MyPlayer_delete(MyPlayer* self);
-
-struct _MyPlayer {
-    /**
-     * @brief To keep some private data.
-     */
+struct MyPlayer {
+    /** @cond */
     void* _private;
-    /**
-     * @brief 'open' function prototype
-     *
-     * @sa MyPlayer_open
-     */
+    /** @endcond */
+
+    /** @cond */
     bool (*open)(MyPlayer* self, const char* url);
-    /**
-     * @brief 'play' function prototype
-     *
-     * @sa MyPlayer_play
-     */
+    /** @endcond */
+
+    /** @cond */
     bool (*play)(MyPlayer* self);
-    /**
-     * @brief 'close' function prototype
-     *
-     * @sa MyPlayer_close
-     */
+    /** @endcond */
+
+    /** @cond */
     bool (*close)(MyPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*destroy)(MyPlayer* self);
+    /** @endcond */
 };
 
 __END_DECLS

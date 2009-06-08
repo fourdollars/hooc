@@ -4,17 +4,40 @@
 #define __CHILD_PLAYER_H__
 __BEGIN_DECLS
 
-typedef struct _ChildPlayer ChildPlayer;
+/**
+ * @class ChildPlayer
+ * @extends MyPlayer
+ */
+typedef struct ChildPlayer ChildPlayer;
 
-ChildPlayer* ChildPlayer_new(void);
+/**
+ * @brief Use this to create object of ChildPlayer.
+ *
+ * @return ChildPlayer* The object instance of ChildPlayer.
+ * @retval NULL If it fails.
+ */
+ChildPlayer* ChildPlayer_create(void);
 
-bool ChildPlayer_delete(ChildPlayer* self);
-
-struct _ChildPlayer {
+struct ChildPlayer {
+    /** @cond */
     void* _private;
+    /** @endcond */
+
+    /** @cond */
     bool (*open)(ChildPlayer* self, const char* url);
+    /** @endcond */
+
+    /** @cond */
     bool (*play)(ChildPlayer* self);
+    /** @endcond */
+
+    /** @cond */
     bool (*close)(ChildPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*destroy)(ChildPlayer* self);
+    /** @endcond */
 };
 
 __END_DECLS

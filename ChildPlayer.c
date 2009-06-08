@@ -9,27 +9,81 @@
  * Functions Declaration
  */
 
+/**
+ * @brief ChildPlayer's open
+ * @memberof ChildPlayer
+ * @fn bool open(ChildPlayer* self, const char* url);
+ *
+ * @param self ChildPlayer's instance
+ * @param url The target source.
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
 static bool ChildPlayer_open(ChildPlayer* self, const char* url);
+
+/**
+ * @brief ChildPlayer's play
+ * @memberof ChildPlayer
+ * @fn bool play(ChildPlayer* self);
+ *
+ * @param self ChildPlayer's instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
 static bool ChildPlayer_play(ChildPlayer* self);
+
+/**
+ * @brief ChildPlayer's close
+ * @memberof ChildPlayer
+ * @fn bool close(ChildPlayer* self);
+ *
+ * @param self ChildPlayer's instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
 static bool ChildPlayer_close(ChildPlayer* self);
+
+/**
+ * @brief ChildPlayer's destroy
+ * @memberof ChildPlayer
+ * @fn bool destroy(ChildPlayer* self);
+ *
+ * @param self ChildPlayer's instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
+static bool ChildPlayer_destroy(ChildPlayer* self);
 
 /*
  * Inner Utilities
  */
 
-typedef struct _private_data private_data;
+/** @cond */
+typedef struct private_data private_data;
+/** @endcond */
 
 static inline private_data* get_data(ChildPlayer* self);
 static inline MyPlayer* get_parent(ChildPlayer* self);
 
-struct _private_data {
+/** @cond */
+struct private_data {
     MyPlayer* parent;
 };
+/** @endcond */
 
 static const ChildPlayer object_template = {
-    .open  = ChildPlayer_open,
-    .play  = ChildPlayer_play,
-    .close = ChildPlayer_close,
+    .open    = ChildPlayer_open,
+    .play    = ChildPlayer_play,
+    .close   = ChildPlayer_close,
+    .destroy = ChildPlayer_destroy,
 };
 
 /*
@@ -47,7 +101,7 @@ static inline MyPlayer* get_parent(ChildPlayer* self)
     return data->parent;
 }
 
-ChildPlayer* ChildPlayer_new(void)
+ChildPlayer* ChildPlayer_create(void)
 {
     logger_trace("%s", __FUNCTION__);
     ChildPlayer* self = malloc(sizeof(ChildPlayer));
@@ -68,17 +122,18 @@ ChildPlayer* ChildPlayer_new(void)
     }
 
     data = get_data(self);
-    data->parent = MyPlayer_new();
+    data->parent = MyPlayer_create();
 
     return self;
 }
 
-bool ChildPlayer_delete(ChildPlayer* self)
+static bool ChildPlayer_destroy(ChildPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
     MyPlayer* parent = get_parent(self);
-    if (MyPlayer_delete(parent) == false) {
+    if (parent->destroy(parent) == false) {
         logger_error("Error when MyPlayer_delete()");
+        return false;
     }
     free(self);
     return true;

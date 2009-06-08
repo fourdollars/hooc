@@ -10,6 +10,8 @@
 
 /**
  * @brief This is MyPlayer's open function.
+ * @memberof MyPlayer
+ * @fn bool open(MyPlayer* self, const char* url);
  *
  * @param self MyPlayer instance
  * @param url The target URL
@@ -22,6 +24,8 @@ static bool MyPlayer_open(MyPlayer* self, const char* url);
 
 /**
  * @brief This is MyPlayer's play function.
+ * @memberof MyPlayer
+ * @fn bool play(MyPlayer* self);
  *
  * @param self MyPlayer instance
  *
@@ -33,6 +37,8 @@ static bool MyPlayer_play(MyPlayer* self);
 
 /**
  * @brief This is MyPlayer's close function.
+ * @memberof MyPlayer
+ * @fn bool close(MyPlayer* self);
  *
  * @param self MyPlayer instance
  *
@@ -42,21 +48,35 @@ static bool MyPlayer_play(MyPlayer* self);
  */
 static bool MyPlayer_close(MyPlayer* self);
 
+/**
+ * @brief This is MyPlayer's destroy function.
+ * @memberof MyPlayer
+ * @fn bool destroy(MyPlayer* self);
+ *
+ * @param self MyPlayer instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
+static bool MyPlayer_destroy(MyPlayer* self);
+
 /*
  * Inner Utilities
  */
 
 static const MyPlayer object_template = {
-    .open  = MyPlayer_open,
-    .play  = MyPlayer_play,
-    .close = MyPlayer_close,
+    .open    = MyPlayer_open,
+    .play    = MyPlayer_play,
+    .close   = MyPlayer_close,
+    .destroy = MyPlayer_destroy,
 };
 
 /*
  * Functions Definition
  */
 
-MyPlayer* MyPlayer_new(void)
+MyPlayer* MyPlayer_create(void)
 {
     logger_trace("%s", __FUNCTION__);
     MyPlayer* self = malloc(sizeof(MyPlayer));
@@ -71,7 +91,7 @@ MyPlayer* MyPlayer_new(void)
     return self;
 }
 
-bool MyPlayer_delete(MyPlayer* self)
+static bool MyPlayer_destroy(MyPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
     free(self);

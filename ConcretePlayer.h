@@ -5,8 +5,18 @@
 #define __CONCRETE_PLAYER_H__
 __BEGIN_DECLS
 
-typedef struct _AbstractPlayer ConcretePlayer;
+/**
+ * @class ConcretePlayer
+ * @implements AbstractPlayer
+ */
+typedef struct AbstractPlayer ConcretePlayer;
 
+/**
+ * @brief Use this to create object of ConcretePlayer.
+ *
+ * @return ConcretePlayer* The object instance of ConcretePlayer.
+ * @retval NULL If it fails.
+ */
 ConcretePlayer* ConcretePlayer_create(void);
 
 __END_DECLS
