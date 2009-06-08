@@ -16,15 +16,22 @@ static const MyPlayer object_template = {
 
 MyPlayer* MyPlayer_new(void)
 {
+    logger_trace("%s", __FUNCTION__);
     MyPlayer* self = malloc(sizeof(MyPlayer));
-    if (self != NULL) {
-        memcpy(self, &object_template, sizeof(MyPlayer));
+
+    if (self == NULL) {
+        logger_error("Memory not enough");
+        return NULL;
     }
+
+    memcpy(self, &object_template, sizeof(MyPlayer));
+
     return self;
 }
 
 bool MyPlayer_delete(MyPlayer* self)
 {
+    logger_trace("%s", __FUNCTION__);
     free(self);
     return true;
 }
@@ -32,11 +39,6 @@ bool MyPlayer_delete(MyPlayer* self)
 static bool MyPlayer_open(MyPlayer* self, const char* url)
 {
     logger_trace("%s %s", __FUNCTION__, url);
-    logger_debug("%s %s", __FUNCTION__, url);
-    logger_info("%s %s", __FUNCTION__, url);
-    logger_warn("%s %s", __FUNCTION__, url);
-    logger_error("%s %s", __FUNCTION__, url);
-    logger_fatal("%s %s", __FUNCTION__, url);
     return true;
 }
 

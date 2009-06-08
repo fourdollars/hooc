@@ -1,8 +1,8 @@
-#include "ObjectMacros.h"
-
+#include <features.h>
+#include <stdbool.h>
 #ifndef __MY_PLAYER_H__
 #define __MY_PLAYER_H__
-CPP_EXTERN_BEGIN
+__BEGIN_DECLS
 
 typedef struct _MyPlayer MyPlayer;
 
@@ -17,5 +17,5 @@ struct _MyPlayer {
     bool (*close)(MyPlayer* self);
 };
 
-CPP_EXTERN_END
+__END_DECLS
 #endif //__MY_PLAYER_H__
