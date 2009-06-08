@@ -62,6 +62,33 @@ static bool ChildPlayer_close(ChildPlayer* self);
  */
 static bool ChildPlayer_destroy(ChildPlayer* self);
 
+/**
+ * @brief ChildPlayer's pause
+ * @memberof ChildPlayer
+ * @fn bool pause(ChildPlayer* self);
+ *
+ * @param self ChildPlayer's instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
+static bool ChildPlayer_pause(ChildPlayer* self);
+
+/**
+ * @brief ChildPlayer's setSpeed
+ * @memberof ChildPlayer
+ * @fn bool setSpeed(ChildPlayer* self, int speed);
+ *
+ * @param self ChildPlayer's instance
+ * @param speed The speed of playback.
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
+static bool ChildPlayer_setSpeed(ChildPlayer* self, int speed);
+
 /*
  * Inner Utilities
  */
@@ -80,10 +107,12 @@ struct private_data {
 /** @endcond */
 
 static const ChildPlayer object_template = {
-    .open    = ChildPlayer_open,
-    .play    = ChildPlayer_play,
-    .close   = ChildPlayer_close,
-    .destroy = ChildPlayer_destroy,
+    .open     = ChildPlayer_open,
+    .play     = ChildPlayer_play,
+    .close    = ChildPlayer_close,
+    .destroy  = ChildPlayer_destroy,
+    .pause    = ChildPlayer_pause,
+    .setSpeed = ChildPlayer_setSpeed,
 };
 
 /*
@@ -136,6 +165,20 @@ static bool ChildPlayer_destroy(ChildPlayer* self)
         return false;
     }
     free(self);
+    return true;
+}
+
+static bool ChildPlayer_pause(ChildPlayer* self)
+{
+    logger_trace("%s", __FUNCTION__);
+    MyPlayer* parent = get_parent(self);
+    parent->pause(parent);
+    return true;
+}
+
+static bool ChildPlayer_setSpeed(ChildPlayer* self, int speed)
+{
+    logger_trace("%s %d", __FUNCTION__, speed);
     return true;
 }
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "MyPlayer.h"
-#include "ChildPlayer.h"
 #include "AbstractPlayer.h"
+#include "ChildPlayer.h"
 #include "ConcretePlayer.h"
 
 /**
@@ -19,28 +19,11 @@
 
 int main(int argc, char* argv[])
 {
+    AbstractPlayer* con = NULL;
     MyPlayer* player = NULL;
     ChildPlayer* child = NULL;
-    AbstractPlayer* con = NULL;
 
-    player = MyPlayer_create();
-    if (player->open(player, "This is my player.") == true) {
-        player->play(player);
-        player->close(player);
-    }
-    if (player->destroy(player) == true) {
-        player = NULL;
-    }
-
-    child = ChildPlayer_create();
-    if (child->open(child, "This is Mr. Child.") == true) {
-        child->play(child);
-        child->close(child);
-    }
-    if (child->destroy(child) == true) {
-        child = NULL;
-    }
-
+    /* The first sample. */
     con = ConcretePlayer_create();
     if (con->open(con, "Abstract & Concrete") == true) {
         con->play(con);
@@ -48,6 +31,30 @@ int main(int argc, char* argv[])
     }
     if (con->destroy(con) == true) {
         con = NULL;
+    }
+
+    /* The second sample. */
+    player = MyPlayer_create();
+    if (player->open(player, "This is my player.") == true) {
+        player->play(player);
+        player->pause(player);
+        player->close(player);
+    }
+    if (player->destroy(player) == true) {
+        player = NULL;
+    }
+
+    /* The third sample. */
+    child = ChildPlayer_create();
+    if (child->open(child, "This is Mr. Child.") == true) {
+        child->play(child);
+        child->pause(child);
+        child->play(child);
+        child->setSpeed(child, 1024);
+        child->close(child);
+    }
+    if (child->destroy(child) == true) {
+        child = NULL;
     }
 
     return 0;

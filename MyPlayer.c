@@ -61,6 +61,19 @@ static bool MyPlayer_close(MyPlayer* self);
  */
 static bool MyPlayer_destroy(MyPlayer* self);
 
+/**
+ * @brief MyPlayer's pause
+ * @memberof MyPlayer
+ * @fn bool pause(MyPlayer* self);
+ *
+ * @param self MyPlayer's instance
+ *
+ * @return bool
+ * @retval true If it works.
+ * @retval false If it fails.
+ */
+static bool MyPlayer_pause(MyPlayer* self);
+
 /*
  * Inner Utilities
  */
@@ -70,6 +83,7 @@ static const MyPlayer object_template = {
     .play    = MyPlayer_play,
     .close   = MyPlayer_close,
     .destroy = MyPlayer_destroy,
+    .pause   = MyPlayer_pause,
 };
 
 /*
@@ -95,6 +109,12 @@ static bool MyPlayer_destroy(MyPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
     free(self);
+    return true;
+}
+
+static bool MyPlayer_pause(MyPlayer* self)
+{
+    logger_trace("%s", __FUNCTION__);
     return true;
 }
 

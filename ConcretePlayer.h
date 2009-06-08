@@ -9,7 +9,7 @@ __BEGIN_DECLS
  * @class ConcretePlayer
  * @implements AbstractPlayer
  */
-typedef struct AbstractPlayer ConcretePlayer;
+typedef AbstractPlayer ConcretePlayer;
 
 /**
  * @brief Use this to create object of ConcretePlayer.

@@ -9,7 +9,7 @@ __BEGIN_DECLS
  * @class MyPlayer
  * @implements AbstractPlayer
  */
-typedef struct AbstractPlayer MyPlayer;
+typedef struct MyPlayer MyPlayer;
 
 /**
  * @brief Use this to create object of MyPlayer.
@@ -18,6 +18,32 @@ typedef struct AbstractPlayer MyPlayer;
  * @retval NULL If it fails.
  */
 MyPlayer* MyPlayer_create(void);
+
+struct MyPlayer {
+    /** @cond */
+    void* _private;
+    /** @endcond */
+
+    /** @cond */
+    bool (*open)(MyPlayer* self, const char* url);
+    /** @endcond */
+
+    /** @cond */
+    bool (*play)(MyPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*close)(MyPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*destroy)(MyPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*pause)(MyPlayer* self);
+    /** @endcond */
+};
 
 __END_DECLS
 #endif //__MY_PLAYER_H__

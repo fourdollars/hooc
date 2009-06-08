@@ -38,6 +38,14 @@ struct ChildPlayer {
     /** @cond */
     bool (*destroy)(ChildPlayer* self);
     /** @endcond */
+
+    /** @cond */
+    bool (*pause)(ChildPlayer* self);
+    /** @endcond */
+
+    /** @cond */
+    bool (*setSpeed)(ChildPlayer* self, int speed);
+    /** @endcond */
 };
 
 __END_DECLS
