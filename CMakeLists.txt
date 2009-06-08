@@ -1,4 +1,4 @@
 cmake_minimum_required (VERSION 2.6)
 project (ObjectOrientedC) 
-set (source main.c MyPlayer.c)
+set (source main.c MyPlayer.c logger.c)
 add_executable (main ${source})
