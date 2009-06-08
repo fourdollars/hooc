@@ -6,8 +6,11 @@ __BEGIN_DECLS
 
 /**
  * @interface AbstractPlayer
+ * @brief AbstractPlayer is an abstract class.
+ *
+ * Abstract class usually is used as Interface or Prototype.
  */
-typedef struct AbstractPlayer AbstractPlayer;
+typedef struct AbstractPlayer AbstractPlayer; //!< An abstract class.
 
 struct AbstractPlayer {
     /** @cond */

@@ -8,8 +8,12 @@ __BEGIN_DECLS
 /**
  * @class ConcretePlayer
  * @implements AbstractPlayer
+ * @brief A concrete class.
+ *
+ * A class can extend from another class or implement some interface.
+ * This ConcretePlayer implement AbstractPlayer.
  */
-typedef AbstractPlayer ConcretePlayer;
+typedef AbstractPlayer ConcretePlayer; //!< A concrete class that implement some abstract class.
 
 /**
  * @brief Use this to create object of ConcretePlayer.
