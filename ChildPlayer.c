@@ -5,11 +5,19 @@
 #include "MyPlayer.h"
 #include "ChildPlayer.h"
 
-typedef struct _private_data private_data;
+/*
+ * Functions Declaration
+ */
 
 static bool ChildPlayer_open(ChildPlayer* self, const char* url);
 static bool ChildPlayer_play(ChildPlayer* self);
 static bool ChildPlayer_close(ChildPlayer* self);
+
+/*
+ * Inner Utilities
+ */
+
+typedef struct _private_data private_data;
 
 static inline private_data* get_data(ChildPlayer* self);
 static inline MyPlayer* get_parent(ChildPlayer* self);
@@ -23,6 +31,10 @@ static const ChildPlayer object_template = {
     .play  = ChildPlayer_play,
     .close = ChildPlayer_close,
 };
+
+/*
+ * Functions Definition
+ */
 
 static inline private_data* get_data(ChildPlayer* self)
 {
