@@ -5,16 +5,56 @@
 #include "ConcretePlayer.h"
 
 /**
- * @mainpage Object Oriented C Template
+ * @mainpage Handy Object Oriented C
  *
- * @section intro_sec Introduction
+ * <H2>Introduction</H2>
  *
- * This is a template that attempts to implement Object Oriented C.
+ * This sample attempts to implement C as Object Oriented look-like.
  *
- * You can see class @ref ConcretePlayer and interface @ref AbstractPlayer.
+ * <H2>Constractor &amp; Constractor</H2>
+ * - Handy Object Oriented C
+ *  - Constractor
+ *    @code Object* instance = Object_create(); @endcode
+ *  - Destructor
+ *    @code instance->destroy(instance); @endcode
+ * - C++
+ *  - Constractor
+ *    @code Object* instance = new Object(); @endcode
+ *  - Destructor
+ *    @code delete instance; @endcode
  *
- * Or class @ref MyPlayer and its subclass @ref ChildPlayer.
+ * <H2>Interface</H2>
  *
+ * Class @ref ConcretePlayer implements Interface @ref AbstractPlayer
+ *
+ * @code
+ * AbstractPlayer* player = ConcretePlayer_create();
+ * player->open(player, "video.avi");
+ * player->play(player);
+ * player->close(player);
+ * player->destroy(player);
+ * @endcode
+ *
+ * <H2>Inheritance</H2>
+ *
+ * Class @ref ChildPlayer extends Class @ref MyPlayer
+ *
+ * @code
+ * MyPlayer* player = MyPlayer_create();
+ * player->open(player, "video.avi");
+ * player->play(player);
+ * player->pause(player);
+ * player->close(player);
+ * player->destroy(player);
+ *
+ * ChildPlayer* player2 = ChildPlayer_create();
+ * player2->open(player2, "video.avi");
+ * player2->play(player2);
+ * player2->pause(player2);
+ * player2->setSpeed(player2, 1024);
+ * player2->close(player2);
+ * player2->destroy(player2);
+ * @endcode
  */
 
 int main(int argc, char* argv[])
