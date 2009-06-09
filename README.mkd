@@ -1,7 +1,3 @@
-# Documentation
-
-    make doc
-
 # Compilation
 
 ## SCons
@@ -13,3 +9,9 @@
     cd build
     cmake ..
     make
+
+# Documentation
+
+    make doc
+
+[Doxygen](html/index.html)
