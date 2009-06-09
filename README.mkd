@@ -1,8 +1,14 @@
 # Documentation
 
-    doxygen Doxygen
+    make doc
 
 # Compilation
+
+## SCons
+
+    make
+
+## CMake
 
     cd build
     cmake ..
