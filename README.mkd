@@ -1,0 +1,9 @@
+# Documentation
+
+    doxygen Doxygen
+
+# Compilation
+
+    cd build
+    cmake ..
+    make

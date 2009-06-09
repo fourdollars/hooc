@@ -3,4 +3,7 @@ all:
 	@scons -Q
 clean:
 	@scons -Q -c
-.PHONY: all clean
+doc:
+	markdown README.mkd > README.html
+	doxygen Doxygen
+.PHONY: all clean doc
