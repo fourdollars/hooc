@@ -98,11 +98,11 @@ typedef struct private_data private_data;
 /** @endcond */
 
 static inline private_data* get_data(ChildPlayer* self);
-static inline MyPlayer* get_parent(ChildPlayer* self);
+static inline MyPlayer* get_super(ChildPlayer* self);
 
 /** @cond */
 struct private_data {
-    MyPlayer* parent;
+    MyPlayer* super;
 };
 /** @endcond */
 
@@ -124,10 +124,10 @@ static inline private_data* get_data(ChildPlayer* self)
     return (private_data*) self->_private;
 }
 
-static inline MyPlayer* get_parent(ChildPlayer* self)
+static inline MyPlayer* get_super(ChildPlayer* self)
 {
     private_data* data = get_data(self);
-    return data->parent;
+    return data->super;
 }
 
 ChildPlayer* ChildPlayer_create(void)
@@ -151,7 +151,7 @@ ChildPlayer* ChildPlayer_create(void)
     }
 
     data = get_data(self);
-    data->parent = MyPlayer_create();
+    data->super = MyPlayer_create();
 
     return self;
 }
@@ -159,8 +159,8 @@ ChildPlayer* ChildPlayer_create(void)
 static bool ChildPlayer_destroy(ChildPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
-    MyPlayer* parent = get_parent(self);
-    if (parent->destroy(parent) == false) {
+    MyPlayer* super = get_super(self);
+    if (super->destroy(super) == false) {
         logger_error("Error when MyPlayer_delete()");
         return false;
     }
@@ -171,8 +171,8 @@ static bool ChildPlayer_destroy(ChildPlayer* self)
 static bool ChildPlayer_pause(ChildPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
-    MyPlayer* parent = get_parent(self);
-    parent->pause(parent);
+    MyPlayer* super = get_super(self);
+    super->pause(super);
     return true;
 }
 
@@ -185,23 +185,23 @@ static bool ChildPlayer_setSpeed(ChildPlayer* self, int speed)
 static bool ChildPlayer_open(ChildPlayer* self, const char* url)
 {
     logger_trace("%s %s", __FUNCTION__, url);
-    MyPlayer* parent = get_parent(self);
-    parent->open(parent, url);
+    MyPlayer* super = get_super(self);
+    super->open(super, url);
     return true;
 }
 
 static bool ChildPlayer_play(ChildPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
-    MyPlayer* parent = get_parent(self);
-    parent->play(parent);
+    MyPlayer* super = get_super(self);
+    super->play(super);
     return true;
 }
 
 static bool ChildPlayer_close(ChildPlayer* self)
 {
     logger_trace("%s", __FUNCTION__);
-    MyPlayer* parent = get_parent(self);
-    parent->close(parent);
+    MyPlayer* super = get_super(self);
+    super->close(super);
     return true;
 }
