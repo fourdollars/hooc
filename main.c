@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "Object.h"
 #include "MyPlayer.h"
 #include "AbstractPlayer.h"
 #include "ChildPlayer.h"
@@ -59,6 +60,21 @@
 
 int main(int argc, char* argv[])
 {
+#if 1
+    Object* objA = Object_create();
+    Object* objB = objA->ref(objA);
+    Object* objC = objB->ref(objB);
+    //*/
+    objA->unref(objA);
+    objA = NULL;
+    objB->unref(objB);
+    objB = NULL;
+    objC->unref(objC);
+    objC = NULL;
+    /*/
+    objA->destroy(objA);
+    //*/
+#else
     AbstractPlayer* con = NULL;
     MyPlayer* player = NULL;
     ChildPlayer* child = NULL;
@@ -96,6 +112,6 @@ int main(int argc, char* argv[])
     if (child->destroy(child) == true) {
         child = NULL;
     }
-
+#endif
     return 0;
 }
