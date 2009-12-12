@@ -155,6 +155,7 @@ static void Object_destroy(Object* self)
 
 static void Object_funcWithoutArgumentNoReturn(Object* self)
 {
+    Object_privateFunction(self);
     return;
 }
 
