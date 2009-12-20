@@ -6,49 +6,35 @@
  * user defined callback function
  */
 
-typedef bool (*my_func_t)(const char*);
+typedef bool (*my_func_t)(const char*, const char*);
 
-static bool funcA(const char*);
-static bool funcB(const char*);
-static bool funcC(const char*);
+static bool func(const char*, const char*);
 
-static bool my_cb_func(func_t func, va_list ap);
+static bool my_cb_func(func_t func, void* data, va_list ap);
 
 int main(int argc, char* argv[])
 {
     list_t* list = NULL;
 
-    add_func(&list, (func_t) funcA);
-    add_func(&list, (func_t) funcB);
-    add_func(&list, (func_t) funcC);
+    add_func(&list, (func_t) func, (void*) "Alice");
+    add_func(&list, (func_t) func, (void*) "Mary");
+    add_func(&list, (func_t) func, (void*) "Lisa");
 
-    invoke_all_func(&list, my_cb_func, "Hello World");
+    invoke_all_func(&list, my_cb_func, "Hello");
     remove_all_func(&list);
 
     return 0;
 }
 
-static bool my_cb_func(func_t func, va_list ap)
+static bool my_cb_func(func_t func, void* data, va_list ap)
 {
     my_func_t my_func = (my_func_t) func;
-    const char* value = va_arg(ap, const char*);
-    return my_func(value);
+    const char* msg = va_arg(ap, const char*);
+    return my_func((const char*) data, msg);
 }
 
-static bool funcA(const char* str)
+static bool func(const char* name, const char* msg)
 {
-    fprintf(stderr, "%s says %s\n", __FUNCTION__,  str);
-    return true;
-}
-
-static bool funcB(const char* str)
-{
-    fprintf(stderr, "%s says %s\n", __FUNCTION__,  str);
-    return true;
-}
-
-static bool funcC(const char* str)
-{
-    fprintf(stderr, "%s says %s\n", __FUNCTION__,  str);
+    fprintf(stderr, "%s says '%s'.\n", name, msg);
     return true;
 }

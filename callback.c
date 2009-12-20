@@ -16,7 +16,7 @@ static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
  * function definition
  */
 
-bool add_func(list_t** list, func_t func)
+bool add_func(list_t** list, func_t func, void* data)
 {
     list_t* item = NULL;
     list_t* ptr = NULL;
@@ -30,6 +30,7 @@ bool add_func(list_t** list, func_t func)
     ptr = (list_t*) malloc(sizeof(list_t));
     memset(ptr, 0, sizeof(list_t));
     ptr->func = func;
+    ptr->data = data;
     ptr->valid = true;
 
     if (item == NULL) {
@@ -117,8 +118,9 @@ bool invoke_all_func(list_t** list, cb_func_t func, ...)
     while (ptr != *list) {
         if (ptr->valid == true) {
             func_t tmp = ptr->func;
+            void* data = ptr->data;
             pthread_mutex_unlock(&mutex);
-            if (func(tmp, ap) == false) {
+            if (func(tmp, data, ap) == false) {
                 va_end(ap);
                 return false;
             }
@@ -135,8 +137,9 @@ bool invoke_all_func(list_t** list, cb_func_t func, ...)
 
     if (ptr->valid == true) {
         func_t tmp = ptr->func;
+        void* data = ptr->data;
         pthread_mutex_unlock(&mutex);
-        if (func(tmp, ap) == false) {
+        if (func(tmp, data, ap) == false) {
             va_end(ap);
             return false;
         }

@@ -12,7 +12,7 @@ __BEGIN_DECLS
 
 typedef struct list_t list_t;
 typedef bool (*func_t)(void*);
-typedef bool (*cb_func_t)(func_t func, va_list ap);
+typedef bool (*cb_func_t)(func_t func, void* data, va_list ap);
 
 /*
  * structure definition
@@ -21,6 +21,7 @@ typedef bool (*cb_func_t)(func_t func, va_list ap);
 struct list_t {
     bool    valid;
     func_t  func;
+    void*   data;
     list_t* prev;
     list_t* next;
 };
@@ -29,7 +30,7 @@ struct list_t {
  * function declaration
  */
 
-bool add_func(list_t** list, func_t func);
+bool add_func(list_t** list, func_t func, void* data);
 bool remove_func(list_t** list, func_t func);
 bool remove_all_func(list_t** list);
 bool invoke_all_func(list_t** list, cb_func_t func, ...);
